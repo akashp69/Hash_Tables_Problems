@@ -4,14 +4,14 @@ import java.util.ArrayList;
 public class MyHashTable<K, V> {
     MyMapNode<K, V> head;
     MyMapNode<K, V> tail;
-
     private final int numOfBuckets;
     ArrayList<MyMapNode<K, V>> myBucketArray;
     /**
      * This Method is Used for to get the word from Linked List
      */
+
     public MyHashTable() {
-        this.numOfBuckets = 10;
+        this.numOfBuckets = 20;
         this.myBucketArray = new ArrayList<>(numOfBuckets);
         /**
          * Create empty LinkedLists
@@ -61,11 +61,10 @@ public class MyHashTable<K, V> {
     public int getBucketIndex(K key) {
         int hashCode = Math.abs(key.hashCode());
         int index = hashCode % numOfBuckets;
-        //       System.out.println("Key: "+key+" hashcode: "+hashCode+" index: "+index);
         return index;
     }
     /**
-     * This  Method is used  to append value to Linked List. myNode: value to append.
+     * This Method is Used  to append value to Linked List. myNode: value to append.
      */
     private void append(MyMapNode<K, V> myNode) {
         if (this.head == null)
@@ -76,6 +75,25 @@ public class MyHashTable<K, V> {
             this.tail.setNext(myNode);
             this.tail = myNode;
         }
+    }
+
+    /**
+     *This method is Used for remove words from list
+     */
+    public void remove(K key) {
+        MyMapNode<K, V> currentNode = head;
+        MyMapNode<K, V> previousNode = null;
+        while (currentNode != null && currentNode.getKey().equals(key)) {
+            head = currentNode.getNext();
+        }
+        while (currentNode != null && !(currentNode.getKey().equals(key))) {
+            previousNode = currentNode;
+            currentNode = currentNode.getNext();
+        }
+        if (currentNode != null)
+            previousNode.next = currentNode.next;
+        if (currentNode == null)
+            System.out.println("Word not found");
     }
     @Override
     public String toString() {

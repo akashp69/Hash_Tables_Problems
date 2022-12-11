@@ -31,6 +31,12 @@ public class HashTableMain {
             hashTable.add(word, value);
         }
         System.out.println(hashTable);
+        hashTable.remove("avoidable");
+    /**
+    *  Remove "avoidable" from the hashtable
+    */
+
+        System.out.println(hashTable);
     }
 }
 
